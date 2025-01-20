@@ -1,0 +1,13 @@
+
+
+https://gtmetrix.com/blog/how-to-eliminate-render-blocking-resources/
+
+
+https://webmasters.stackexchange.com/questions/67286/should-i-split-a-large-css-media-queries-file-into-separate-files-for-each-scree
+
+
+https://web.dev/critical-rendering-path-render-blocking-css/
+
+
+
+

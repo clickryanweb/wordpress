@@ -1,0 +1,12 @@
+
+
+- no double firewalls (security)
+
+- check if there's js errors
+
+- php version
+
+
+- htaccess updates 
+
+

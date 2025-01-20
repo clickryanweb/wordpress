@@ -1,0 +1,13 @@
+
+
+https://wordpress.org/support/topic/actionscheduler_logs-is-getting-huge/
+
+
+add_filter('action_scheduler_retention_period', 'adj_action_scheduler_log_table');
+
+function adj_action_scheduler_log_table() {
+	return 7 * DAY_IN_SECONDS;
+}
+
+
+

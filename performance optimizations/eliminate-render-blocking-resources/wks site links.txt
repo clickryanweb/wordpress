@@ -1,0 +1,23 @@
+
+
+
+// getmetrix
+
+
+//
+	https://tools.keycdn.com/speed
+
+
+//pagespeed insights
+
+
+
+
+https://gtmetrix.com/eliminate-render-blocking-resources.html
+
+
+
+https://gtmetrix.com/blog/how-to-eliminate-render-blocking-resources/
+
+
+

@@ -1,0 +1,43 @@
+
+
+
+https://wordpress.stackexchange.com/questions/139325/defer-all-js-except-certain-ones-in-functions-php-file
+
+
+https://wp-kama.com/hook/clean_url
+
+https://wpengine.com/resources/defer-parsing-javascript-wordpress/
+
+
+
+add_filter( 'clean_url', 'defer_parsing_of_js', 11, 1 );
+
+function defer_parsing_of_js ( $url ) {
+
+    //for front-end
+    if(!is_user_logged_in()){  // or if (is_page( 'Home' )) {
+
+
+        if ( FALSE === strpos( $url, '.js' ) ) return $url;
+
+        //exceptions
+        if(strpos( $url, 'jquery.min.js' ) ) return $url;
+        if(strpos( $url, 'jquery.js' ) ) return $url;
+        if(strpos( $url, 'Extra' ) ) return $url;
+        if(strpos( $url, 'wp-includes' ) ) return $url;
+        if(strpos( $url, 'et-cache' ) ) return $url;
+        if(strpos( $url, 'popups-for-divi' ) ) return $url;
+    
+
+        return "$url' defer='defer";
+
+    //normal for admins...
+    }else{
+        return $url;
+    }
+
+    //or just return...
+        //return $url;
+
+}
+

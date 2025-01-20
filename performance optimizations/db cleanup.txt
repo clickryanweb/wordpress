@@ -1,0 +1,12 @@
+
+
+
+https://www.elegantthemes.com/blog/tips-tricks/cleaning-up-your-wordpress-database-to-optimize-your-websites-performance
+
+
+
+//for check...
+https://wordpress.org/plugins/rvg-optimize-database/
+
+
+

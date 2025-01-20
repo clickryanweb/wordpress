@@ -1,0 +1,38 @@
+
+
+https://docs.pantheon.io/optimize-wp-options-table-autoloaded-data
+
+
+
+---
+
+
+
+SELECT * FROM wp_options WHERE autoload='yes' and option_name like '%transient%' order by option_name
+
+
+
+
+update wp_options set autoload = 'no' WHERE autoload='yes' and option_name like '%z_taxonomy%' 
+
+
+
+///gpt...
+
+Yes, you can safely clear the rewrite_rules option in the wp_options table of a WordPress database. The rewrite_rules are regenerated automatically when you visit the Settings > Permalinks page in the WordPress admin and save your permalink structure.
+
+Steps:
+Backup your database before making any changes, just in case.
+
+Run the following SQL query to delete the rewrite_rules:
+
+
+	DELETE FROM wp_options WHERE option_name = 'rewrite_rules';
+
+
+After deleting the entry, go to Settings > Permalinks in your WordPress admin and click Save Changes. This will regenerate the rewrite_rules.
+
+This process is safe because the rewrite rules will be recreated, ensuring that your site's URL structure works as expected.
+
+
+

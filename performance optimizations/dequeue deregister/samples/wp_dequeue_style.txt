@@ -1,0 +1,73 @@
+
+https://wordpress.stackexchange.com/questions/161476/how-to-remove-dashicons-min-css-from-frontend
+
+// clear cache first
+
+
+
+/// dequeue plugins on frontend...
+add_action('wp_print_styles', 'disableplugin_assets', 100);
+
+function disableplugin_assets()
+{
+
+
+	if (is_user_logged_in()) {
+		return false;
+	}
+
+
+	if (!is_user_logged_in()) {
+
+
+
+		wp_dequeue_style('dflip-icons-style');
+		wp_deregister_style('dflip-icons-style');
+
+
+		wp_dequeue_style('dflip-style');
+		wp_deregister_style('dflip-style');
+
+
+
+		wp_dequeue_script('dflip-script');
+		wp_deregister_script('dflip-style');
+
+		//wp_dequeue_style('dashicons');
+		wp_deregister_style('dashicons');
+
+		//wp_dequeue_style('classic-theme-styles');
+		wp_deregister_style('classic-theme-styles');
+
+		//wp_dequeue_style('wp-block-library');
+		wp_deregister_style('wp-block-library');
+	}
+}
+
+
+
+//defer...
+function defer_parsing_of_js($url)
+{
+
+	//for front-end
+	if (!is_user_logged_in()) {
+		
+		if (FALSE === strpos($url, '.js')) return $url;
+
+		//exceptions
+		if (strpos($url, 'jquery.min.js')) return $url;
+		if (strpos($url, 'jquery.js')) return $url;
+		//if (strpos($url, 'wp-includes')) return $url;
+		if (strpos($url, 'lazyload.min.js')) return $url;
+
+
+		return "$url' defer='defer";
+
+		//normal for admins...
+	} else {
+		return $url;
+	}
+}
+add_filter('clean_url', 'defer_parsing_of_js', 11, 1);
+

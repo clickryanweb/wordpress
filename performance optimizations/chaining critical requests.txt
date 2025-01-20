@@ -1,0 +1,23 @@
+
+
+
+https://stackoverflow.com/questions/54651145/solve-minimize-critical-requests-depth-page-performance
+//
+
+defer/async non critical js.
+
+combine css/js files to minimize the request.
+
+pre-connect with external domain for example:
+
+<link href='fonts.googleapis.com' rel='preconnect' crossorigin>
+pre-load css/js, for example:
+
+
+
+
+https://developers.google.com/publisher-tag/guides/general-best-practices
+
+//google ads
+
+

@@ -1,0 +1,13 @@
+
+
+https://stackoverflow.com/questions/61427372/how-to-use-browser-native-image-lazy-loading-to-wordpress-galleries
+
+
+https://wordpress.stackexchange.com/questions/396542/how-to-lazy-load-post-thumbnail
+
+
+
+
+<img src="<?php the_post_thumbnail_url('medium') ?>" class="img-fluid rounded shadow-3 mb-1" alt="<?php the_title() ?>" loading="lazy">
+
+

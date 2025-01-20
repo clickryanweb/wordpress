@@ -1,0 +1,79 @@
+
+
+
+https://digwp.com/2019/03/disable-script-style-added-plugins/
+
+https://wordpress.org/support/topic/remove-stylesheet-from-front-page/
+
+
+
+add_action('wp_print_styles', 'disableplugin_assets', 100);
+
+function disableplugin_assets() {
+	if (is_front_page() || is_home()) {
+        wp_dequeue_style( 'wordpresscrm-jquery' );
+        wp_deregister_style( 'wordpresscrm-jquery' );
+
+        wp_dequeue_style( 'jquery-datetimepicker' );
+        wp_deregister_style( 'jquery-datetimepicker' );
+
+        wp_dequeue_style( 'wordpresscrm-layout' );
+        wp_deregister_style( 'wordpresscrm-layout' );
+
+        wp_dequeue_script( 'visual-portfolio-layout-slider' );
+        wp_deregister_script( 'visual-portfolio-layout-slider' );
+        wp_dequeue_style( 'visual-portfolio-layout-slider' );
+        wp_deregister_style( 'visual-portfolio-layout-slider' );
+
+
+        wp_dequeue_script( 'visual-portfolio-custom-scrollbar' );
+        wp_deregister_script( 'visual-portfolio-custom-scrollbar' );
+        wp_dequeue_style( 'visual-portfolio-custom-scrollbar' );
+        wp_deregister_style( 'visual-portfolio-custom-scrollbar' );
+
+        wp_dequeue_style( 'visual-portfolio-items-style-fade' );
+        wp_deregister_style( 'visual-portfolio-items-style-fade' );
+
+        wp_dequeue_script( 'date-dropper-js' );
+        wp_deregister_script( 'date-dropper-js' );
+
+
+    }
+	
+}
+
+
+
+///
+
+Disable script and style elsewhere
+And last but not least, here are two examples that demonstrate an important point. Not all functions register and enqueue CSS and JavaScript files as recommended. And in those cases, the previously prescribed methods may not work. So sometimes we have to get creative with alternate methods and hooks to use. Here is a good example:
+
+// via the wp_print_styles hook
+function shapeSpace_disable_download_manager_styles() {
+	
+	wp_deregister_style('dlm-frontend');
+	
+}
+add_action('wp_print_styles', 'shapeSpace_disable_download_manager_styles', 100);
+
+
+
+For whatever reason, the only way I could disable this particular plugin's stylesheet was to use wp_deregister_style() hooked into wp_print_styles. Whatever it worked. To be fair, I didn't have a lot of time to fiddle around with unwanted plugin styles, so there may be some sort of rational explanation.
+
+And the second example is even more unusual. Observe:
+
+// had to use the get_footer hook!!!
+function shapeSpace_disable_yarpp_styles() {
+	
+	wp_dequeue_style('yarppRelatedCss');
+	
+}
+add_action('get_footer', 'shapeSpace_disable_yarpp_styles');
+Notice the hook used here: get_footer!!! Whaaaa...? Truly bizarre but it was the ONLY thing that would work to disable the unwanted YARRP styles. Not sure if I would recommend this technique on any other live site, just because it feels kinda weird using wp_dequeue_style() via the get_footer hook.
+
+That's all for now, Thank you for visiting :)
+
+
+
+

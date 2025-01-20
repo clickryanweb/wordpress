@@ -1,0 +1,78 @@
+
+
+https://stackoverflow.com/questions/18944027/how-do-i-defer-or-async-this-wordpress-javascript-snippet-to-load-lastly-for-fas
+
+
+https://javascript.info/script-async-defer
+
+
+
+If you're working with JavaScript, it's important to understand the difference between async and defer attributes. Async allows your script to run as soon as it's loaded, without blocking other elements on the page. Defer means your script will only execute after the page has finished loading.
+
+
+
+
+add_action("wp_enqueue_scripts", "my_theme_scripts", 9999);
+
+
+function my_theme_scripts() {
+
+/*  wp_enqueue_script( 'theme_js', get_stylesheet_directory_uri() . '/js/script.js', array('jquery'), false, true ); 
+
+  wp_enqueue_script( 'custom_js', get_stylesheet_directory_uri() . '/js/thescript.js', array('jquery'), false, true ); 
+
+*/
+
+
+ // script to be deferred
+
+    wp_register_script('theme_js-defer', get_stylesheet_directory_uri() . '/js/script.js', '', 2, false);
+    wp_enqueue_script('theme_js-defer');  
+
+
+    wp_register_script('custom_js-defer', get_stylesheet_directory_uri() . '/js/thescript.js', '', 2, false);
+    wp_enqueue_script('custom_js-defer');  
+}
+
+
+
+
+//////////////////////
+
+
+
+
+function defer_parsing_of_js ( $url ) {
+
+    //for front-end
+    if(!is_user_logged_in()){
+        if ( FALSE === strpos( $url, '.js' ) ) return $url;
+
+        //exceptions
+        if(strpos( $url, 'jquery.min.js' ) ) return $url;
+        if(strpos( $url, 'jquery.js' ) ) return $url;
+        if(strpos( $url, 'Extra' ) ) return $url;
+        if(strpos( $url, 'wp-includes' ) ) return $url;
+        if(strpos( $url, 'et-cache' ) ) return $url;
+        if(strpos( $url, 'popups-for-divi' ) ) return $url;
+    
+
+        return "$url' defer='defer";
+
+    //normal for admins...
+    }else{
+        return $url;
+    }
+
+
+
+  }
+add_filter( 'clean_url', 'defer_parsing_of_js', 11, 1 );
+
+
+
+
+
+
+
+
